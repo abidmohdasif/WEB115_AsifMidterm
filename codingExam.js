@@ -8,14 +8,15 @@ button.addEventListener("click", function() {
     let remainder = loanAmount - calculate1; // this is the principal amount
     let years = Number(prompt('Enter the number of months for the loan (30 or 15): '));
     if (years == 30 || years == 15) {
-        let monthlyPayment = (((0.045 / 12) * remainder) / (1 - Math.pow(1 + (0.045 / 12), (years * -12)))).toFixed(2); 
+        let monthlyPayment = (((0.0575 / 12) * remainder) / (1 - Math.pow(1 + (0.0575 / 12), (years * -12)))).toFixed(2); 
         // console.log(monthlyPayment)
     
-        let interestRate = 4.5;
+        let interestRate = 5.75;
         let mortgageAmount = (interestRate / 100 * remainder * years); //total mortgage amount
         let totalInterest = mortgageAmount - remainder; //total interest paid
-        // console.log(mortgageAmount)
-        // console.log(totalInterest)
+        console.log(mortgageAmount)
+        console.log(totalInterest)
+        console.log(remainder)
     
         information.textContent = `The monthly payment is: ${monthlyPayment}`;
         let info2 = document.createElement('p');
@@ -33,19 +34,20 @@ button.addEventListener("click", function() {
 
         // Display the monthly mortgage payments and the mortgage loan balance for each month.
         for(let i=0, j=0; i<years*12 ; i++) {
-            let monthlyInterest = (0.045 / 12) * remainder;
+            let monthlyInterest = (0.0575 / 12) * remainder;
             let monthlyPrincipal = monthlyPayment - monthlyInterest;
             remainder = remainder - monthlyPrincipal;
             j++;
+
             let info6 = document.createElement('p');
             info6.textContent = `Month ${j}: Principal: ${monthlyPrincipal.toFixed(2)} Interest: ${monthlyInterest.toFixed(2)} Balance: ${remainder.toFixed(2)}`;
             information.appendChild(info6);
-
-            if (remainder <= 0) {
+            if (remainder <= 5) {
                 let info7 = document.createElement('p');
                 info7.textContent = `The loan has been paid off in `;
+                information.appendChild(info7)
             }
-
+            
 
     }
     }
